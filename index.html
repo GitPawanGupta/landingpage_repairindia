@@ -549,22 +549,24 @@
 
                                     <div>
                                         <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Brand (Optional)</label>
-                                        <select id="brandSelect" class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300 cursor-pointer">
-                                            <option value="" disabled selected>Select Brand</option>
-                                            <option value="Not Specified">No Specific Brand</option>
-                                            <option value="LG">LG</option>
-                                            <option value="Samsung">Samsung</option>
-                                            <option value="Whirlpool">Whirlpool</option>
-                                            <option value="Daikin">Daikin</option>
-                                            <option value="Voltas">Voltas</option>
-                                            <option value="IFB">IFB</option>
-                                            <option value="Bosch">Bosch</option>
-                                            <option value="Havells">Havells</option>
-                                            <option value="Kent">Kent</option>
-                                            <option value="Blue Star">Blue Star</option>
-                                            <option value="Godrej">Godrej</option>
-                                            <option value="Other">Other Brand</option>
-                                        </select>
+                                        <div class="relative">
+                                            <input 
+                                                type="text" 
+                                                id="brandSearch" 
+                                                placeholder="Search or Select Brand" 
+                                                autocomplete="off"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                            >
+                                            <input type="hidden" id="brandSelect">
+                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            
+                                            <!-- Dropdown List -->
+                                            <div id="brandDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                                <div id="brandList" class="py-2">
+                                                    <!-- Brands will be populated here -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1034,26 +1036,26 @@
         }
         
         /* City Dropdown Custom Scrollbar */
-        #cityDropdown {
+        #cityDropdown, #brandDropdown {
             scrollbar-width: thin;
             scrollbar-color: #f97316 rgba(255, 255, 255, 0.1);
         }
         
-        #cityDropdown::-webkit-scrollbar {
+        #cityDropdown::-webkit-scrollbar, #brandDropdown::-webkit-scrollbar {
             width: 6px;
         }
         
-        #cityDropdown::-webkit-scrollbar-track {
+        #cityDropdown::-webkit-scrollbar-track, #brandDropdown::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
         }
         
-        #cityDropdown::-webkit-scrollbar-thumb {
+        #cityDropdown::-webkit-scrollbar-thumb, #brandDropdown::-webkit-scrollbar-thumb {
             background: #f97316;
             border-radius: 10px;
         }
         
-        #cityDropdown::-webkit-scrollbar-thumb:hover {
+        #cityDropdown::-webkit-scrollbar-thumb:hover, #brandDropdown::-webkit-scrollbar-thumb:hover {
             background: #ea580c;
         }
     </style>
@@ -1624,28 +1626,59 @@
             lastScroll = currentScroll;
         });
 
-        // Category Dropdown Data
+        // Category Dropdown Data (Updated)
         const categoryData = {
             'AC & Appliances': [
-                'Air Conditioner',
-                'TV | LCD | LED',
-                'Refrigerator',
-                'Washing Machine',
-                'Laptop Repair',
-                'Vacuum Cleaner'
+                'Air Cooler',
+                'Air Purifier',
+                'Chimney',
+                'Double Door Fridge',
+                'Front Load Washing Machine',
+                'Geyser/Water Heater',
+                'Hob/Gas Stove',
+                'Inverter Battery',
+                'Microwave',
+                'Oil Heater',
+                'RO Water Purifier',
+                'Room Heater',
+                'Semi-Auto Washing Machine',
+                'Side by Side Door Fridge',
+                'Single Door Fridge',
+                'Split AC',
+                'Triple/Four Door Fridge',
+                'TV/LCD/LED',
+                'Vacuum Cleaner',
+                'Water Dispenser',
+                'Window AC'
             ],
             'Kitchen Appliances': [
+                'Bottle Cooler',
+                'Deep Freezer',
+                'Dishwasher',
+                'Double Door Fridge',
+                'Food Processor',
+                'Geyser/Water Heater',
+                'Hob/Gas Stove',
+                'Ice Cream Cabinet',
+                'Juicer',
                 'Microwave',
-                'Water Purifier',
-                'Chimney',
-                'Hob | Gas Stove',
-                'Water Heater'
+                'Mixer Grinder',
+                'Rice Cooker',
+                'RO Water Purifier',
+                'Side by Side Door Fridge',
+                'Single Door Fridge',
+                'Triple/Four Door Fridge',
+                'Visi Cooler',
+                'Water Cooler',
+                'Water Dispenser'
             ],
             'Commercial Appliances': [
-                'Water Dispenser',
-                'Water Cooler',
+                'Bottle Cooler',
                 'Deep Freezer',
-                'Bottle Cooler'
+                'Ice Cream Cabinet',
+                'Visi Cooler',
+                'Water Cooler',
+                'Water Dispenser'
             ]
         };
 
@@ -1672,6 +1705,18 @@
             'Srikakulam', 'Surat', 'Suryapet', 'Thrissur', 'Tiruchirappalli', 'Triputi', 
             'Trivandrum', 'Tumakuru', 'Udaipur', 'Udupi', 'Vadodara', 'Valsad', 'Veraval', 
             'Vijayawada', 'Visakhapatnam', 'Vizianagaram', 'Warangal', 'Other City'
+        ];
+
+        // All Brands Data (Alphabetically Sorted)
+        const brandsData = [
+            'AO Smith', 'Aquaguard', 'Bajaj', 'Blue Star', 'Bosch', 'Carrier', 'Croma', 
+            'Crompton', 'Daikin', 'Elica', 'Electrolux', 'Eureka Forbes', 'Faber', 
+            'Frigidaire', 'Glen', 'Godrej', 'Haier', 'Havells', 'Hitachi', 'Hindware', 
+            'Hyundai', 'IFB', 'Inalsa', 'Kaff', 'Kelvinator', 'Kent', 'Kenstar', 
+            'Kutchina', 'LG', 'Livpure', 'Maharaja', 'Mitsubishi', 'O\'General', 'Onida', 
+            'Orient', 'Panasonic', 'Philips', 'Pioneer', 'Prestige', 'Puriet', 'Racold', 
+            'Samsung', 'Sansui', 'Sharp', 'Siemens', 'Sony', 'Sunflame', 'Toshiba', 'Usha', 
+            'Venus', 'V-Guard', 'Videocon', 'Voltas', 'Westinghouse', 'Whirlpool', 'Other Brand'
         ];
 
         // Initialize City Dropdown
@@ -1732,6 +1777,66 @@
         document.addEventListener('click', function(e) {
             if (!citySearch.contains(e.target) && !cityDropdown.contains(e.target)) {
                 cityDropdown.classList.add('hidden');
+            }
+        });
+
+        // Brand Search Functionality
+        function initializeBrandDropdown() {
+            const brandList = document.getElementById('brandList');
+            brandList.innerHTML = '';
+            
+            brandsData.forEach(brand => {
+                const brandItem = document.createElement('div');
+                brandItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                brandItem.textContent = brand;
+                brandItem.onclick = () => selectBrand(brand);
+                brandList.appendChild(brandItem);
+            });
+        }
+
+        const brandSearch = document.getElementById('brandSearch');
+        const brandDropdown = document.getElementById('brandDropdown');
+        const brandSelect = document.getElementById('brandSelect');
+
+        brandSearch.addEventListener('focus', function() {
+            brandDropdown.classList.remove('hidden');
+            initializeBrandDropdown();
+        });
+
+        brandSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const brandList = document.getElementById('brandList');
+            brandList.innerHTML = '';
+            
+            const filteredBrands = brandsData.filter(brand => 
+                brand.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredBrands.length === 0) {
+                brandList.innerHTML = '<div class="px-4 py-3 text-xs text-slate-400 text-center">No brand found</div>';
+            } else {
+                filteredBrands.forEach(brand => {
+                    const brandItem = document.createElement('div');
+                    brandItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                    brandItem.textContent = brand;
+                    brandItem.onclick = () => selectBrand(brand);
+                    brandList.appendChild(brandItem);
+                });
+            }
+            
+            brandDropdown.classList.remove('hidden');
+        });
+
+        function selectBrand(brand) {
+            brandSearch.value = brand;
+            brandSelect.value = brand;
+            brandDropdown.classList.add('hidden');
+        }
+
+        // Close brand dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!brandSearch.contains(e.target) && !brandDropdown.contains(e.target)) {
+                brandDropdown.classList.add('hidden');
             }
         });
 

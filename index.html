@@ -575,17 +575,24 @@
                                     </div>
                                     <div>
                                         <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">City</label>
-                                        <select id="citySelect" required class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300 cursor-pointer">
-                                            <option value="" disabled selected>Select City *</option>
-                                            <option value="Delhi NCR">Delhi NCR</option>
-                                            <option value="Mumbai">Mumbai</option>
-                                            <option value="Bengaluru">Bengaluru</option>
-                                            <option value="Hyderabad">Hyderabad</option>
-                                            <option value="Pune">Pune</option>
-                                            <option value="Chennai">Chennai</option>
-                                            <option value="Kolkata">Kolkata</option>
-                                            <option value="Ahmedabad">Ahmedabad</option>
-                                        </select>
+                                        <div class="relative">
+                                            <input 
+                                                type="text" 
+                                                id="citySearch" 
+                                                placeholder="Search or Select City *" 
+                                                autocomplete="off"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                            >
+                                            <input type="hidden" id="citySelect" required>
+                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            
+                                            <!-- Dropdown List -->
+                                            <div id="cityDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                                <div id="cityList" class="py-2">
+                                                    <!-- Cities will be populated here -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1024,6 +1031,30 @@
         
         .brand-logo-item:hover span {
             color: #f97316;
+        }
+        
+        /* City Dropdown Custom Scrollbar */
+        #cityDropdown {
+            scrollbar-width: thin;
+            scrollbar-color: #f97316 rgba(255, 255, 255, 0.1);
+        }
+        
+        #cityDropdown::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        #cityDropdown::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+        }
+        
+        #cityDropdown::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+        
+        #cityDropdown::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
         }
     </style>
 
@@ -1617,6 +1648,92 @@
                 'Bottle Cooler'
             ]
         };
+
+        // All Cities Data (Alphabetically Sorted)
+        const citiesData = [
+            'Ahmedabad', 'Ajmer', 'Amalapuram', 'Amarawati', 'Ambala', 'Amreli', 'Amritsar', 
+            'Anakapalli', 'Anand', 'Anantapuram', 'Bagalkote', 'Ballari', 'Bapatla', 'Belgaum', 
+            'Bengaluru', 'Bharuch', 'Bhavnagar', 'Bhimavaram', 'Bhopal', 'Bhubaneswar', 'Bidar', 
+            'Bijapur', 'Bukaro', 'Chamarajanagara', 'Chandigarh', 'Chennai', 'Chhota Udaipur', 
+            'Chikkabalapur', 'Chikmagalur', 'Chitradurga', 'Chittor', 'Cochin', 'Coimbatore', 
+            'Dahod', 'Davanagere', 'Dehradun', 'Delhi', 'Dhanbad', 'Dharawada', 'Doddaballapura', 
+            'Elluru', 'Faridabad', 'Gadag', 'Gandhinagar', 'Ghaziabad', 'Godhra', 'Guntur', 
+            'Gurugram', 'Gwalior', 'Hassan', 'Haveri', 'Himmatnagar', 'Hisar', 'Hyderabad', 
+            'Indore', 'Jaipur', 'Jalandhar', 'Jamnagar', 'Jhansi', 'Jodhpur', 'Kadapa', 
+            'Kakinada', 'Kalaburgi', 'Kanpur', 'Karimnagar', 'Karnal', 'Khamman', 'Kolara', 
+            'Kolhapur', 'Kolkata', 'Kollam', 'Kopala', 'Kothagudem', 'Kurnool', 'Kurukshetra', 
+            'Lucknow', 'Ludhiana', 'Machilipatnam', 'Madanapalli', 'Mahbubnagar', 'Mandya', 
+            'Mangluru', 'Markapuram', 'Mathura', 'Meerut', 'Mehsana', 'Modasa', 'Morbi', 
+            'Mysuru', 'Nagpur', 'Nalgonda', 'Nandiad', 'Nandyal', 'Narasaraopeta', 'Nashik', 
+            'Navsari', 'Nellore', 'Nizamabad', 'Noida', 'Ongole', 'Palanpur', 'Panjim', 
+            'Panchkula', 'Patan', 'Patna', 'Pryagraj', 'Pune', 'Puttaparthi', 'Raichur', 
+            'Raipur', 'Rajamahendravram', 'Rajkot', 'Ramanagara', 'Ranchi', 'Sangareddy', 
+            'Shamirpet', 'Shamshabad', 'Shimla', 'Shimoga', 'Siddipet', 'Solapur', 'Srinagar', 
+            'Srikakulam', 'Surat', 'Suryapet', 'Thrissur', 'Tiruchirappalli', 'Triputi', 
+            'Trivandrum', 'Tumakuru', 'Udaipur', 'Udupi', 'Vadodara', 'Valsad', 'Veraval', 
+            'Vijayawada', 'Visakhapatnam', 'Vizianagaram', 'Warangal', 'Other City'
+        ];
+
+        // Initialize City Dropdown
+        function initializeCityDropdown() {
+            const cityList = document.getElementById('cityList');
+            cityList.innerHTML = '';
+            
+            citiesData.forEach(city => {
+                const cityItem = document.createElement('div');
+                cityItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                cityItem.textContent = city;
+                cityItem.onclick = () => selectCity(city);
+                cityList.appendChild(cityItem);
+            });
+        }
+
+        // City Search Functionality
+        const citySearch = document.getElementById('citySearch');
+        const cityDropdown = document.getElementById('cityDropdown');
+        const citySelect = document.getElementById('citySelect');
+
+        citySearch.addEventListener('focus', function() {
+            cityDropdown.classList.remove('hidden');
+            initializeCityDropdown();
+        });
+
+        citySearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cityList = document.getElementById('cityList');
+            cityList.innerHTML = '';
+            
+            const filteredCities = citiesData.filter(city => 
+                city.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredCities.length === 0) {
+                cityList.innerHTML = '<div class="px-4 py-3 text-xs text-slate-400 text-center">No city found</div>';
+            } else {
+                filteredCities.forEach(city => {
+                    const cityItem = document.createElement('div');
+                    cityItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                    cityItem.textContent = city;
+                    cityItem.onclick = () => selectCity(city);
+                    cityList.appendChild(cityItem);
+                });
+            }
+            
+            cityDropdown.classList.remove('hidden');
+        });
+
+        function selectCity(city) {
+            citySearch.value = city;
+            citySelect.value = city;
+            cityDropdown.classList.add('hidden');
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!citySearch.contains(e.target) && !cityDropdown.contains(e.target)) {
+                cityDropdown.classList.add('hidden');
+            }
+        });
 
         // Handle Category Change
         function handleCategoryChange() {

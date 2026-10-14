@@ -518,12 +518,24 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Category</label>
-                                        <select id="mainCategorySelect" onchange="handleCategoryChange()" required class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300 cursor-pointer">
-                                            <option value="" disabled selected>Select Category *</option>
-                                            <option value="AC & Appliances">AC & Appliances</option>
-                                            <option value="Kitchen Appliances">Kitchen Appliances</option>
-                                            <option value="Commercial Appliances">Commercial Appliances</option>
-                                        </select>
+                                        <div class="relative">
+                                            <input 
+                                                type="text" 
+                                                id="categorySearch" 
+                                                placeholder="Search or Select Category *" 
+                                                autocomplete="off"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                            >
+                                            <input type="hidden" id="mainCategorySelect" required>
+                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            
+                                            <!-- Dropdown List -->
+                                            <div id="categoryDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                                <div id="categoryList" class="py-2">
+                                                    <!-- Categories will be populated here -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div>
@@ -552,14 +564,24 @@
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                     <div>
                                         <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Service Type</label>
-                                        <select id="serviceTypeSelect" required class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300 cursor-pointer">
-                                            <option value="" disabled selected>Service Type *</option>
-                                            <option value="Repair"> Repair</option>
-                                            <option value="Deep Clean Service"> Deep Clean Service</option>
-                                            <option value="Installation"> Installation</option>
-                                            <option value="Reinstallation"> Reinstallation</option>
-                                            <option value="Uninstallation (Dismantle)"> Uninstallation</option>
-                                        </select>
+                                        <div class="relative">
+                                            <input 
+                                                type="text" 
+                                                id="serviceTypeSearch" 
+                                                placeholder="Search or Select Service Type *" 
+                                                autocomplete="off"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                            >
+                                            <input type="hidden" id="serviceTypeSelect" required>
+                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            
+                                            <!-- Dropdown List -->
+                                            <div id="serviceTypeDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                                <div id="serviceTypeList" class="py-2">
+                                                    <!-- Service types will be populated here -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div>
@@ -1050,27 +1072,27 @@
             color: #f97316;
         }
         
-        /* City, Product & Brand Dropdown Custom Scrollbar */
-        #cityDropdown, #productDropdown, #brandDropdown {
+        /* All Dropdowns Custom Scrollbar */
+        #categoryDropdown, #productDropdown, #serviceTypeDropdown, #cityDropdown, #brandDropdown {
             scrollbar-width: thin;
             scrollbar-color: #f97316 rgba(255, 255, 255, 0.1);
         }
         
-        #cityDropdown::-webkit-scrollbar, #productDropdown::-webkit-scrollbar, #brandDropdown::-webkit-scrollbar {
+        #categoryDropdown::-webkit-scrollbar, #productDropdown::-webkit-scrollbar, #serviceTypeDropdown::-webkit-scrollbar, #cityDropdown::-webkit-scrollbar, #brandDropdown::-webkit-scrollbar {
             width: 6px;
         }
         
-        #cityDropdown::-webkit-scrollbar-track, #productDropdown::-webkit-scrollbar-track, #brandDropdown::-webkit-scrollbar-track {
+        #categoryDropdown::-webkit-scrollbar-track, #productDropdown::-webkit-scrollbar-track, #serviceTypeDropdown::-webkit-scrollbar-track, #cityDropdown::-webkit-scrollbar-track, #brandDropdown::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
         }
         
-        #cityDropdown::-webkit-scrollbar-thumb, #productDropdown::-webkit-scrollbar-thumb, #brandDropdown::-webkit-scrollbar-thumb {
+        #categoryDropdown::-webkit-scrollbar-thumb, #productDropdown::-webkit-scrollbar-thumb, #serviceTypeDropdown::-webkit-scrollbar-thumb, #cityDropdown::-webkit-scrollbar-thumb, #brandDropdown::-webkit-scrollbar-thumb {
             background: #f97316;
             border-radius: 10px;
         }
         
-        #cityDropdown::-webkit-scrollbar-thumb:hover, #productDropdown::-webkit-scrollbar-thumb:hover, #brandDropdown::-webkit-scrollbar-thumb:hover {
+        #categoryDropdown::-webkit-scrollbar-thumb:hover, #productDropdown::-webkit-scrollbar-thumb:hover, #serviceTypeDropdown::-webkit-scrollbar-thumb:hover, #cityDropdown::-webkit-scrollbar-thumb:hover, #brandDropdown::-webkit-scrollbar-thumb:hover {
             background: #ea580c;
         }
     </style>
@@ -1734,6 +1756,12 @@
             'Venus', 'V-Guard', 'Videocon', 'Voltas', 'Westinghouse', 'Whirlpool', 'Other Brand'
         ];
 
+        // All Categories
+        const categoriesData = ['AC & Appliances', 'Kitchen Appliances', 'Commercial Appliances'];
+
+        // All Service Types
+        const serviceTypesData = ['Repair', 'Deep Clean Service', 'Installation', 'Reinstallation', 'Uninstallation (Dismantle)'];
+
         // Initialize City Dropdown
         function initializeCityDropdown() {
             const cityList = document.getElementById('cityList');
@@ -1855,6 +1883,66 @@
             }
         });
 
+        // Service Type Search Functionality
+        function initializeServiceTypeDropdown() {
+            const serviceTypeList = document.getElementById('serviceTypeList');
+            serviceTypeList.innerHTML = '';
+            
+            serviceTypesData.forEach(serviceType => {
+                const serviceTypeItem = document.createElement('div');
+                serviceTypeItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                serviceTypeItem.textContent = serviceType;
+                serviceTypeItem.onclick = () => selectServiceType(serviceType);
+                serviceTypeList.appendChild(serviceTypeItem);
+            });
+        }
+
+        const serviceTypeSearch = document.getElementById('serviceTypeSearch');
+        const serviceTypeDropdown = document.getElementById('serviceTypeDropdown');
+        const serviceTypeSelect = document.getElementById('serviceTypeSelect');
+
+        serviceTypeSearch.addEventListener('focus', function() {
+            serviceTypeDropdown.classList.remove('hidden');
+            initializeServiceTypeDropdown();
+        });
+
+        serviceTypeSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const serviceTypeList = document.getElementById('serviceTypeList');
+            serviceTypeList.innerHTML = '';
+            
+            const filteredServiceTypes = serviceTypesData.filter(serviceType => 
+                serviceType.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredServiceTypes.length === 0) {
+                serviceTypeList.innerHTML = '<div class="px-4 py-3 text-xs text-slate-400 text-center">No service type found</div>';
+            } else {
+                filteredServiceTypes.forEach(serviceType => {
+                    const serviceTypeItem = document.createElement('div');
+                    serviceTypeItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                    serviceTypeItem.textContent = serviceType;
+                    serviceTypeItem.onclick = () => selectServiceType(serviceType);
+                    serviceTypeList.appendChild(serviceTypeItem);
+                });
+            }
+            
+            serviceTypeDropdown.classList.remove('hidden');
+        });
+
+        function selectServiceType(serviceType) {
+            serviceTypeSearch.value = serviceType;
+            serviceTypeSelect.value = serviceType;
+            serviceTypeDropdown.classList.add('hidden');
+        }
+
+        // Close service type dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!serviceTypeSearch.contains(e.target) && !serviceTypeDropdown.contains(e.target)) {
+                serviceTypeDropdown.classList.add('hidden');
+            }
+        });
+
         // Handle Category Change (Updated for searchable product dropdown)
         function handleCategoryChange() {
             const mainCat = document.getElementById('mainCategorySelect').value;
@@ -1876,6 +1964,67 @@
                 productSearch.placeholder = 'First select a category';
             }
         }
+
+        // Category Search Functionality
+        function initializeCategoryDropdown() {
+            const categoryList = document.getElementById('categoryList');
+            categoryList.innerHTML = '';
+            
+            categoriesData.forEach(category => {
+                const categoryItem = document.createElement('div');
+                categoryItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                categoryItem.textContent = category;
+                categoryItem.onclick = () => selectCategory(category);
+                categoryList.appendChild(categoryItem);
+            });
+        }
+
+        const categorySearch = document.getElementById('categorySearch');
+        const categoryDropdown = document.getElementById('categoryDropdown');
+        const mainCategorySelect = document.getElementById('mainCategorySelect');
+
+        categorySearch.addEventListener('focus', function() {
+            categoryDropdown.classList.remove('hidden');
+            initializeCategoryDropdown();
+        });
+
+        categorySearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const categoryList = document.getElementById('categoryList');
+            categoryList.innerHTML = '';
+            
+            const filteredCategories = categoriesData.filter(category => 
+                category.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredCategories.length === 0) {
+                categoryList.innerHTML = '<div class="px-4 py-3 text-xs text-slate-400 text-center">No category found</div>';
+            } else {
+                filteredCategories.forEach(category => {
+                    const categoryItem = document.createElement('div');
+                    categoryItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                    categoryItem.textContent = category;
+                    categoryItem.onclick = () => selectCategory(category);
+                    categoryList.appendChild(categoryItem);
+                });
+            }
+            
+            categoryDropdown.classList.remove('hidden');
+        });
+
+        function selectCategory(category) {
+            categorySearch.value = category;
+            mainCategorySelect.value = category;
+            categoryDropdown.classList.add('hidden');
+            handleCategoryChange();
+        }
+
+        // Close category dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) {
+                categoryDropdown.classList.add('hidden');
+            }
+        });
 
         // Product Search Functionality
         let currentProducts = [];
@@ -1948,8 +2097,7 @@
 
         // Select Item from Navigation (Updated for searchable dropdowns)
         function selectItem(category, product) {
-            document.getElementById('mainCategorySelect').value = category;
-            handleCategoryChange();
+            selectCategory(category);
             setTimeout(() => {
                 selectProduct(product);
             }, 100);
@@ -1958,10 +2106,9 @@
 
         // Quick Book Function
         function quickBook(category, product) {
-            document.getElementById('mainCategorySelect').value = category;
-            handleCategoryChange();
+            selectCategory(category);
             setTimeout(() => {
-                document.getElementById('subCategorySelect').value = product;
+                selectProduct(product);
             }, 100);
             document.getElementById('leadBookingForm').scrollIntoView({ behavior: 'smooth' });
         }

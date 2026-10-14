@@ -528,9 +528,24 @@
 
                                     <div>
                                         <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Product</label>
-                                        <select id="subCategorySelect" required class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300 cursor-pointer">
-                                            <option value="" disabled selected>Select Product *</option>
-                                        </select>
+                                        <div class="relative">
+                                            <input 
+                                                type="text" 
+                                                id="productSearch" 
+                                                placeholder="Search or Select Product *" 
+                                                autocomplete="off"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                            >
+                                            <input type="hidden" id="subCategorySelect" required>
+                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            
+                                            <!-- Dropdown List -->
+                                            <div id="productDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                                <div id="productList" class="py-2">
+                                                    <!-- Products will be populated here -->
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -1035,27 +1050,27 @@
             color: #f97316;
         }
         
-        /* City Dropdown Custom Scrollbar */
-        #cityDropdown, #brandDropdown {
+        /* City, Product & Brand Dropdown Custom Scrollbar */
+        #cityDropdown, #productDropdown, #brandDropdown {
             scrollbar-width: thin;
             scrollbar-color: #f97316 rgba(255, 255, 255, 0.1);
         }
         
-        #cityDropdown::-webkit-scrollbar, #brandDropdown::-webkit-scrollbar {
+        #cityDropdown::-webkit-scrollbar, #productDropdown::-webkit-scrollbar, #brandDropdown::-webkit-scrollbar {
             width: 6px;
         }
         
-        #cityDropdown::-webkit-scrollbar-track, #brandDropdown::-webkit-scrollbar-track {
+        #cityDropdown::-webkit-scrollbar-track, #productDropdown::-webkit-scrollbar-track, #brandDropdown::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
         }
         
-        #cityDropdown::-webkit-scrollbar-thumb, #brandDropdown::-webkit-scrollbar-thumb {
+        #cityDropdown::-webkit-scrollbar-thumb, #productDropdown::-webkit-scrollbar-thumb, #brandDropdown::-webkit-scrollbar-thumb {
             background: #f97316;
             border-radius: 10px;
         }
         
-        #cityDropdown::-webkit-scrollbar-thumb:hover, #brandDropdown::-webkit-scrollbar-thumb:hover {
+        #cityDropdown::-webkit-scrollbar-thumb:hover, #productDropdown::-webkit-scrollbar-thumb:hover, #brandDropdown::-webkit-scrollbar-thumb:hover {
             background: #ea580c;
         }
     </style>
@@ -1840,29 +1855,103 @@
             }
         });
 
-        // Handle Category Change
+        // Handle Category Change (Updated for searchable product dropdown)
         function handleCategoryChange() {
             const mainCat = document.getElementById('mainCategorySelect').value;
+            const productSearch = document.getElementById('productSearch');
             const subCatSelect = document.getElementById('subCategorySelect');
             
-            subCatSelect.innerHTML = '<option value="" disabled selected>Select Product *</option>';
+            // Clear product selection
+            productSearch.value = '';
+            subCatSelect.value = '';
             
+            // Populate product dropdown
             if (mainCat && categoryData[mainCat]) {
-                categoryData[mainCat].forEach(item => {
-                    const option = document.createElement('option');
-                    option.value = item;
-                    option.textContent = item;
-                    subCatSelect.appendChild(option);
-                });
+                // Enable product search
+                productSearch.disabled = false;
+                productSearch.placeholder = 'Search or Select Product *';
+                initializeProductDropdown(categoryData[mainCat]);
+            } else {
+                productSearch.disabled = true;
+                productSearch.placeholder = 'First select a category';
             }
         }
 
-        // Select Item from Navigation
+        // Product Search Functionality
+        let currentProducts = [];
+
+        function initializeProductDropdown(products) {
+            currentProducts = products;
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            
+            products.forEach(product => {
+                const productItem = document.createElement('div');
+                productItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                productItem.textContent = product;
+                productItem.onclick = () => selectProduct(product);
+                productList.appendChild(productItem);
+            });
+        }
+
+        const productSearch = document.getElementById('productSearch');
+        const productDropdown = document.getElementById('productDropdown');
+        const subCatSelect = document.getElementById('subCategorySelect');
+
+        // Disable initially
+        productSearch.disabled = true;
+        productSearch.placeholder = 'First select a category';
+
+        productSearch.addEventListener('focus', function() {
+            if (currentProducts.length > 0) {
+                productDropdown.classList.remove('hidden');
+                initializeProductDropdown(currentProducts);
+            }
+        });
+
+        productSearch.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            
+            const filteredProducts = currentProducts.filter(product => 
+                product.toLowerCase().includes(searchTerm)
+            );
+            
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = '<div class="px-4 py-3 text-xs text-slate-400 text-center">No product found</div>';
+            } else {
+                filteredProducts.forEach(product => {
+                    const productItem = document.createElement('div');
+                    productItem.className = 'px-4 py-2.5 text-xs sm:text-sm text-white hover:bg-brand-orange/20 cursor-pointer transition-all font-semibold';
+                    productItem.textContent = product;
+                    productItem.onclick = () => selectProduct(product);
+                    productList.appendChild(productItem);
+                });
+            }
+            
+            productDropdown.classList.remove('hidden');
+        });
+
+        function selectProduct(product) {
+            productSearch.value = product;
+            subCatSelect.value = product;
+            productDropdown.classList.add('hidden');
+        }
+
+        // Close product dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!productSearch.contains(e.target) && !productDropdown.contains(e.target)) {
+                productDropdown.classList.add('hidden');
+            }
+        });
+
+        // Select Item from Navigation (Updated for searchable dropdowns)
         function selectItem(category, product) {
             document.getElementById('mainCategorySelect').value = category;
             handleCategoryChange();
             setTimeout(() => {
-                document.getElementById('subCategorySelect').value = product;
+                selectProduct(product);
             }, 100);
             document.getElementById('leadBookingForm').scrollIntoView({ behavior: 'smooth' });
         }

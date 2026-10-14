@@ -1,0 +1,11 @@
+{
+  "appService.zipIgnorePattern": [
+    "node_modules{,/**}",
+    ".vscode{,/**}",
+    ".git{,/**}",
+    ".gitignore",
+    "README.md"
+  ],
+  "appService.defaultWebAppToDeploy": "undefined",
+  "appService.deploySubpath": "."
+}

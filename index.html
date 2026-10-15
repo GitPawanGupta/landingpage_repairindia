@@ -272,46 +272,125 @@
         img, video {
             content-visibility: auto;
         }
+        
+        /* Mobile Menu Improvements */
+        @media (max-width: 1024px) {
+            /* Prevent scroll when menu is open */
+            body.menu-open {
+                overflow: hidden;
+            }
+            
+            /* Better touch targets on mobile */
+            button, a, input, select, textarea {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Adjust hero section for mobile */
+            section[style*="height: 100vh"] {
+                min-height: 100vh;
+                height: auto;
+            }
+        }
+        
+        /* Improve form dropdowns on mobile */
+        @media (max-width: 640px) {
+            #categoryDropdown, #productDropdown, #serviceTypeDropdown, 
+            #brandDropdown, #cityDropdown {
+                position: fixed !important;
+                left: 1rem !important;
+                right: 1rem !important;
+                width: auto !important;
+                max-height: 60vh !important;
+            }
+            
+            /* Force checkbox to be smaller on mobile */
+            #termsConsent {
+                width: 16px !important;
+                height: 16px !important;
+                min-width: 16px !important;
+                min-height: 16px !important;
+            }
+        }
+        
+        /* Better video background on mobile */
+        @media (max-width: 768px) {
+            video {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        
+        /* Prevent horizontal scroll on mobile */
+        @media (max-width: 640px) {
+            body, html {
+                overflow-x: hidden;
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body class="bg-gradient-to-br from-slate-50 via-white to-slate-50 text-slate-700 font-sans antialiased overflow-x-hidden">
 
     <!-- Premium Top Contact Bar - Fully Transparent -->
-    <div class="relative py-2.5 px-4 md:px-8 text-xs md:text-sm font-medium z-50" style="background: transparent !important; border-bottom: 1px solid rgba(255,255,255,0.05);">
-        <div class="max-w-7xl mx-auto grid grid-cols-3 items-center gap-4 relative z-50">
-            <!-- Left: Phone Number -->
-            <a href="tel:9212322322" class="hover:text-brand-orange transition-all duration-300 flex items-center gap-2 group text-white drop-shadow-lg justify-start">
-                <div class="w-8 h-8 rounded-lg bg-brand-orange/20 backdrop-blur-xl border border-brand-orange/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-orange/30 transition-all shrink-0">
-                    <i class="fa-solid fa-phone text-brand-orange"></i>
-                </div>
-                <span class="border-b border-transparent group-hover:border-brand-orange text-[11px] md:text-xs font-bold">+91 9212 322 322</span>
-            </a>
-
-            <!-- Center: Text with Pulse -->
-            <div class="flex items-center gap-3 justify-center">
-                <span class="relative flex h-3 w-3 shrink-0">
+    <div class="relative py-2 px-2 md:px-8 text-xs md:text-sm font-medium z-[100]" style="background: transparent !important; border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto relative z-50">
+            <!-- Mobile: Single Row with Phone -->
+            <div class="flex md:hidden items-center justify-between gap-2">
+                <a href="tel:9212322322" class="hover:text-brand-orange transition-all duration-300 flex items-center gap-2 group text-white drop-shadow-lg">
+                    <div class="w-7 h-7 rounded-lg bg-brand-orange/20 backdrop-blur-xl border border-brand-orange/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-orange/30 transition-all shrink-0">
+                        <i class="fa-solid fa-phone text-brand-orange text-xs"></i>
+                    </div>
+                    <span class="text-[10px] font-bold">+91 9212 322 322</span>
+                </a>
+                <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-orange shadow-glow"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-orange shadow-glow"></span>
                 </span>
-                <span class="font-semibold text-white drop-shadow-lg text-center text-[11px] md:text-xs whitespace-nowrap">Express Doorstep Repair & Services Across India</span>
             </div>
 
-            <!-- Right: Email -->
-            <a href="mailto:info@repairindia.in" class="hover:text-brand-orange transition-all duration-300 flex items-center gap-2 group text-white drop-shadow-lg justify-end">
-                <span class="border-b border-transparent group-hover:border-brand-orange text-[11px] md:text-xs font-bold">info@repairindia.in</span>
-                <div class="w-8 h-8 rounded-lg bg-brand-orange/20 backdrop-blur-xl border border-brand-orange/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-orange/30 transition-all shrink-0">
-                    <i class="fa-solid fa-envelope text-brand-orange"></i>
+            <!-- Desktop: Three Columns -->
+            <div class="hidden md:grid grid-cols-3 items-center gap-4">
+                <!-- Left: Phone Number -->
+                <a href="tel:9212322322" class="hover:text-brand-orange transition-all duration-300 flex items-center gap-2 group text-white drop-shadow-lg justify-start">
+                    <div class="w-8 h-8 rounded-lg bg-brand-orange/20 backdrop-blur-xl border border-brand-orange/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-orange/30 transition-all shrink-0">
+                        <i class="fa-solid fa-phone text-brand-orange"></i>
+                    </div>
+                    <span class="border-b border-transparent group-hover:border-brand-orange text-xs font-bold">+91 9212 322 322</span>
+                </a>
+
+                <!-- Center: Text with Pulse -->
+                <div class="flex items-center gap-3 justify-center">
+                    <span class="relative flex h-3 w-3 shrink-0">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-orange shadow-glow"></span>
+                    </span>
+                    <span class="font-semibold text-white drop-shadow-lg text-center text-xs whitespace-nowrap">Express Doorstep Repair & Services Across India</span>
                 </div>
-            </a>
+
+                <!-- Right: Email -->
+                <a href="mailto:info@repairindia.in" class="hover:text-brand-orange transition-all duration-300 flex items-center gap-2 group text-white drop-shadow-lg justify-end">
+                    <span class="border-b border-transparent group-hover:border-brand-orange text-xs font-bold">info@repairindia.in</span>
+                    <div class="w-8 h-8 rounded-lg bg-brand-orange/20 backdrop-blur-xl border border-brand-orange/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-brand-orange/30 transition-all shrink-0">
+                        <i class="fa-solid fa-envelope text-brand-orange"></i>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 
     <!-- Premium Navigation - Fully Transparent No Background -->
-    <header class="sticky top-0 z-50 transition-all duration-500" id="navbar" style="background: transparent !important; backdrop-filter: none !important;">
-        <nav class="max-w-7xl mx-auto px-4 md:px-12 py-4 flex justify-between items-center gap-2 relative z-50" style="background: transparent !important;">
+    <header class="sticky top-0 z-[100] transition-all duration-500" id="navbar" style="background: transparent !important; backdrop-filter: none !important;">
+        <nav class="max-w-7xl mx-auto px-2 md:px-12 py-3 md:py-4 flex justify-between items-center gap-2 relative z-50" style="background: transparent !important;">
             <a href="#" class="flex items-center gap-3 group shrink-0 relative z-10">
-                <img src="https://repairindia.in/images/WhatsApp_Image_2024-03-26_at_4.58.20_PM-removebg-preview.png" alt="Repair India Logo" class="h-12 sm:h-16 w-auto object-contain group-hover:scale-110 transition-all duration-300 drop-shadow-2xl">
+                <img src="https://repairindia.in/images/WhatsApp_Image_2024-03-26_at_4.58.20_PM-removebg-preview.png" alt="Repair India Logo" class="h-10 sm:h-12 md:h-16 w-auto object-contain group-hover:scale-110 transition-all duration-300 drop-shadow-2xl">
             </a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="lg:hidden text-white p-2 rounded-lg glass-dark border border-white/20 hover:border-brand-orange transition-all">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
             
             <ul class="hidden lg:flex items-center gap-8 text-white">
                 <!-- AC & Appliances Dropdown -->
@@ -374,6 +453,80 @@
 
 
         </nav>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobileMenu" class="lg:hidden fixed inset-0 z-50 hidden">
+            <div class="fixed inset-0 bg-navy-950/95 backdrop-blur-xl"></div>
+            <div class="relative h-full flex flex-col">
+                <!-- Mobile Menu Header -->
+                <div class="flex justify-between items-center p-4 border-b border-white/10">
+                    <img src="https://repairindia.in/images/WhatsApp_Image_2024-03-26_at_4.58.20_PM-removebg-preview.png" alt="Repair India Logo" class="h-12 w-auto">
+                    <button id="closeMobileMenu" class="text-white p-2 rounded-lg glass-dark border border-white/20 hover:border-brand-orange transition-all">
+                        <i class="fa-solid fa-xmark text-2xl"></i>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Content -->
+                <div class="flex-1 overflow-y-auto p-6">
+                    <ul class="space-y-4 text-white">
+                        <!-- AC & Appliances -->
+                        <li>
+                            <button class="mobile-dropdown-btn w-full text-left flex justify-between items-center py-3 px-4 rounded-xl glass-dark border border-white/20 hover:border-brand-orange transition-all font-bold text-sm uppercase">
+                                <span>AC & Appliances</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <ul class="mobile-dropdown-content hidden mt-2 ml-4 space-y-2">
+                                <li><a href="#services-section" onclick="selectItem('AC & Appliances', 'Air Conditioner')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-snowflake w-4 mr-2 text-brand-orange/80"></i>Air Conditioner</a></li>
+                                <li><a href="#services-section" onclick="selectItem('AC & Appliances', 'TV | LCD | LED')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-tv w-4 mr-2 text-brand-orange/80"></i>TV | LCD | LED</a></li>
+                                <li><a href="#services-section" onclick="selectItem('AC & Appliances', 'Refrigerator')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-temperature-low w-4 mr-2 text-brand-orange/80"></i>Refrigerator</a></li>
+                                <li><a href="#services-section" onclick="selectItem('AC & Appliances', 'Washing Machine')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-shirt w-4 mr-2 text-brand-orange/80"></i>Washing Machine</a></li>
+                                <li><a href="#services-section" onclick="selectItem('AC & Appliances', 'Laptop Repair')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-laptop w-4 mr-2 text-brand-orange/80"></i>Laptop Repair</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Kitchen -->
+                        <li>
+                            <button class="mobile-dropdown-btn w-full text-left flex justify-between items-center py-3 px-4 rounded-xl glass-dark border border-white/20 hover:border-brand-orange transition-all font-bold text-sm uppercase">
+                                <span>Kitchen</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <ul class="mobile-dropdown-content hidden mt-2 ml-4 space-y-2">
+                                <li><a href="#services-section" onclick="selectItem('Kitchen Appliances', 'Microwave')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-kitchen-set w-4 mr-2 text-brand-orange/80"></i>Microwave</a></li>
+                                <li><a href="#services-section" onclick="selectItem('Kitchen Appliances', 'Water Purifier')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-droplet w-4 mr-2 text-brand-orange/80"></i>Water Purifier</a></li>
+                                <li><a href="#services-section" onclick="selectItem('Kitchen Appliances', 'Chimney')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-wind w-4 mr-2 text-brand-orange/80"></i>Chimney</a></li>
+                                <li><a href="#services-section" onclick="selectItem('Kitchen Appliances', 'Hob | Gas Stove')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-fire-burner w-4 mr-2 text-brand-orange/80"></i>Gas Stove</a></li>
+                            </ul>
+                        </li>
+
+                        <!-- Commercial -->
+                        <li>
+                            <button class="mobile-dropdown-btn w-full text-left flex justify-between items-center py-3 px-4 rounded-xl glass-dark border border-white/20 hover:border-brand-orange transition-all font-bold text-sm uppercase">
+                                <span>Commercial</span>
+                                <i class="fa-solid fa-chevron-down text-xs transition-transform"></i>
+                            </button>
+                            <ul class="mobile-dropdown-content hidden mt-2 ml-4 space-y-2">
+                                <li><a href="#services-section" onclick="selectItem('Commercial Appliances', 'Water Dispenser')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-faucet w-4 mr-2 text-brand-orange/80"></i>Water Dispenser</a></li>
+                                <li><a href="#services-section" onclick="selectItem('Commercial Appliances', 'Water Cooler')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-glass-water w-4 mr-2 text-brand-orange/80"></i>Water Cooler</a></li>
+                                <li><a href="#services-section" onclick="selectItem('Commercial Appliances', 'Deep Freezer')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-box-archive w-4 mr-2 text-brand-orange/80"></i>Deep Freezer</a></li>
+                                <li><a href="#services-section" onclick="selectItem('Commercial Appliances', 'Bottle Cooler')" class="block py-2 px-4 rounded-lg hover:bg-brand-orange/20 text-sm"><i class="fa-solid fa-bottle-water w-4 mr-2 text-brand-orange/80"></i>Bottle Cooler</a></li>
+                            </ul>
+                        </li>
+
+                        <li><a href="#about" class="block py-3 px-4 rounded-xl glass-dark border border-white/20 hover:border-brand-orange transition-all font-bold text-sm uppercase">Why Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Mobile Menu Footer with CTA -->
+                <div class="p-4 border-t border-white/10 space-y-3">
+                    <a href="#leadBookingForm" class="block text-center px-6 py-3 rounded-xl bg-gradient-to-r from-brand-orange to-brand-hover text-white font-black text-sm shadow-glow">
+                        Book Service Now
+                    </a>
+                    <a href="tel:9212322322" class="block text-center px-6 py-3 rounded-xl glass-dark border border-white/20 text-white font-black text-sm">
+                        <i class="fa-solid fa-phone text-brand-orange mr-2"></i>Call Expert
+                    </a>
+                </div>
+            </div>
+        </div>
     </header>
 
     <!-- Premium Video Hero Section - Sticky with Fixed Video Background -->
@@ -399,49 +552,49 @@
         </div>
 
         <!-- Content Overlay - Scrollable content starts here -->
-        <div class="relative z-10 h-full flex items-center" style="padding-top: 180px; padding-bottom: 60px;">
-            <div class="max-w-7xl mx-auto px-4 md:px-12 w-full">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="relative z-10 h-full flex items-start" style="padding-top: 140px; padding-bottom: 40px; overflow-y: auto;">
+            <div class="max-w-7xl mx-auto px-3 md:px-12 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-center">
                     
                     <!-- Left Content with Enhanced Animations -->
-                    <div class="lg:col-span-6 space-y-4 md:space-y-6 text-white" style="animation: fade-in 1s ease-out;">
-                        <div class="inline-flex items-center gap-3 glass-dark px-3 py-2 sm:px-4 sm:py-2.5 rounded-full font-bold text-[10px] sm:text-xs border border-white/20 max-w-full group hover:border-brand-orange/50 transition-all duration-300 hover:scale-105">
+                    <div class="lg:col-span-6 space-y-3 md:space-y-6 text-white order-2 lg:order-1" style="animation: fade-in 1s ease-out;">
+                        <div class="inline-flex items-center gap-2 glass-dark px-3 py-2 rounded-full font-bold text-[9px] sm:text-xs border border-white/20 max-w-full group hover:border-brand-orange/50 transition-all duration-300 hover:scale-105">
                             <span class="w-2 h-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 shrink-0 shadow-glow animate-pulse"></span>
                             <span class="truncate">India's #1 Trusted Doorstep Service Partner</span>
                         </div>
                         
-                        <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black leading-[1.1] tracking-tight font-display text-shadow-lg" style="animation: slide-up 1s ease-out 0.2s both; text-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(249,115,22,0.2);">
-                            India's Leading Appliance Repair & Home <span class="gradient-text bg-gradient-to-r from-brand-orange via-amber-400 to-brand-orange bg-clip-text text-transparent relative animate-float" style="text-shadow: 0 0 30px rgba(249,115,22,0.5);">Services
-                                <svg class="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black leading-[1.15] tracking-tight font-display text-shadow-lg" style="animation: slide-up 1s ease-out 0.2s both; text-shadow: 0 4px 20px rgba(0,0,0,0.5), 0 0 40px rgba(249,115,22,0.2);">
+                            India's Leading Appliance Repair & Home <span class="gradient-text bg-gradient-to-r from-brand-orange via-amber-400 to-brand-orange bg-clip-text text-transparent relative" style="text-shadow: 0 0 30px rgba(249,115,22,0.5);">Services
+                                <svg class="absolute -bottom-1 left-0 w-full hidden sm:block" viewBox="0 0 300 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M2 10C50 3 100 2 150 6C200 10 250 8 298 2" stroke="#f97316" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
                                 </svg>
                             </span>
                         </h1>
                         
-                        <p class="text-slate-200 text-sm sm:text-base lg:text-lg font-medium leading-relaxed max-w-2xl" style="animation: slide-up 1s ease-out 0.4s both; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
+                        <p class="text-slate-200 text-xs sm:text-sm lg:text-base font-medium leading-relaxed max-w-2xl" style="animation: slide-up 1s ease-out 0.4s both; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">
                             When your appliance stops, your day shouldn't. Get a <span class="font-bold text-white">certified professional</span> at your doorstep with <span class="font-bold text-white">transparent pricing, genuine parts</span>, and <span class="font-bold text-brand-orange glow-text">90-days warranty</span>.
                         </p>
 
                         <!-- Premium Feature Cards with Staggered Animation -->
-                        <div class="grid grid-cols-3 gap-2 sm:gap-3 pt-3" style="animation: slide-up 1s ease-out 0.6s both;">
-                            <div class="glass-dark p-3 sm:p-4 rounded-xl shadow-2xl text-center group hover:shadow-glow hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-brand-orange/50 cursor-pointer" style="animation-delay: 0.1s;">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 bg-gradient-to-br from-orange-500/20 to-orange-600/20 backdrop-blur-xl text-brand-orange rounded-xl flex items-center justify-center font-bold text-base sm:text-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 border border-orange-500/30 shadow-lg">
+                        <div class="grid grid-cols-3 gap-2 pt-2" style="animation: slide-up 1s ease-out 0.6s both;">
+                            <div class="glass-dark p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl shadow-2xl text-center group hover:shadow-glow hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-brand-orange/50 cursor-pointer" style="animation-delay: 0.1s;">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2 bg-gradient-to-br from-orange-500/20 to-orange-600/20 backdrop-blur-xl text-brand-orange rounded-lg sm:rounded-xl flex items-center justify-center font-bold text-sm sm:text-base md:text-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 border border-orange-500/30 shadow-lg">
                                     <i class="fa-solid fa-calendar-check drop-shadow-lg"></i>
                                 </div>
-                                <div class="font-black text-[10px] sm:text-xs leading-tight group-hover:text-brand-orange transition-colors">Flexible Scheduling</div>
-                                <div class="text-[9px] sm:text-[10px] text-slate-300 font-medium mt-0.5 hidden sm:block">Book at convenience</div>
+                                <div class="font-black text-[9px] sm:text-[10px] md:text-xs leading-tight group-hover:text-brand-orange transition-colors">Flexible Scheduling</div>
+                                <div class="text-[8px] sm:text-[9px] md:text-[10px] text-slate-300 font-medium mt-0.5 hidden sm:block">Book at convenience</div>
                             </div>
                             
-                            <div class="glass-dark p-3 sm:p-4 rounded-xl shadow-2xl text-center group hover:shadow-glow hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-emerald-500/50 cursor-pointer" style="animation-delay: 0.2s;">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 backdrop-blur-xl text-emerald-400 rounded-xl flex items-center justify-center font-bold text-base sm:text-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 border border-emerald-500/30 shadow-lg">
+                            <div class="glass-dark p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl shadow-2xl text-center group hover:shadow-glow hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-emerald-500/50 cursor-pointer" style="animation-delay: 0.2s;">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2 bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 backdrop-blur-xl text-emerald-400 rounded-lg sm:rounded-xl flex items-center justify-center font-bold text-sm sm:text-base md:text-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 border border-emerald-500/30 shadow-lg">
                                     <i class="fa-solid fa-house-circle-check drop-shadow-lg"></i>
                                 </div>
-                                <div class="font-black text-[10px] sm:text-xs leading-tight group-hover:text-emerald-400 transition-colors">Doorstep Service</div>
-                                <div class="text-[9px] sm:text-[10px] text-slate-300 font-medium mt-0.5 hidden sm:block">Fast & professional</div>
+                                <div class="font-black text-[9px] sm:text-[10px] md:text-xs leading-tight group-hover:text-emerald-400 transition-colors">Doorstep Service</div>
+                                <div class="text-[8px] sm:text-[9px] md:text-[10px] text-slate-300 font-medium mt-0.5 hidden sm:block">Fast & professional</div>
                             </div>
 
-                            <div class="glass-dark p-3 sm:p-4 rounded-xl shadow-2xl text-center group hover:shadow-glow hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-purple-500/50 cursor-pointer" style="animation-delay: 0.3s;">
-                                <div class="w-10 h-10 sm:w-12 sm:h-12 mx-auto mb-2 bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-xl text-purple-400 rounded-xl flex items-center justify-center font-bold text-base sm:text-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 border border-purple-500/30 shadow-lg">
+                            <div class="glass-dark p-2 sm:p-3 md:p-4 rounded-lg sm:rounded-xl shadow-2xl text-center group hover:shadow-glow hover:-translate-y-2 transition-all duration-500 border border-white/10 hover:border-purple-500/50 cursor-pointer" style="animation-delay: 0.3s;">
+                                <div class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mx-auto mb-1 sm:mb-2 bg-gradient-to-br from-purple-500/20 to-purple-600/20 backdrop-blur-xl text-purple-400 rounded-lg sm:rounded-xl flex items-center justify-center font-bold text-sm sm:text-base md:text-lg group-hover:scale-125 group-hover:rotate-12 transition-all duration-500 border border-purple-500/30 shadow-lg">
                                     <i class="fa-solid fa-shield-halved drop-shadow-lg"></i>
                                 </div>
                                 <div class="font-black text-[10px] sm:text-xs leading-tight group-hover:text-purple-400 transition-colors">Genuine Parts</div>
@@ -450,12 +603,12 @@
                         </div>
 
                         <!-- Social Proof with Animation -->
-                        <div class="flex items-center gap-4 sm:gap-6 pt-3" style="animation: slide-up 1s ease-out 0.8s both;">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 pt-2" style="animation: slide-up 1s ease-out 0.8s both;">
                             <div class="flex -space-x-2 overflow-hidden shrink-0">
-                                <img class="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-white/30 shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Customer">
-                                <img class="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-white/30 shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Customer">
-                                <img class="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-white/30 shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Customer">
-                                <div class="inline-block h-8 w-8 sm:h-10 sm:w-10 rounded-full ring-2 ring-white/30 bg-gradient-to-br from-brand-orange to-brand-hover flex items-center justify-center text-white font-black text-[10px] shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300 cursor-pointer">
+                                <img class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white/30 shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Customer">
+                                <img class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white/30 shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Customer">
+                                <img class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white/30 shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Customer">
+                                <div class="inline-block h-8 w-8 sm:h-9 sm:w-9 rounded-full ring-2 ring-white/30 bg-gradient-to-br from-brand-orange to-brand-hover flex items-center justify-center text-white font-black text-[9px] shadow-2xl hover:scale-110 hover:z-10 transition-transform duration-300 cursor-pointer">
                                     1.8L+
                                 </div>
                             </div>
@@ -466,20 +619,20 @@
                                     <i class="fa-solid fa-star animate-pulse" style="animation-delay: 0.2s;"></i>
                                     <i class="fa-solid fa-star animate-pulse" style="animation-delay: 0.3s;"></i>
                                     <i class="fa-solid fa-star animate-pulse" style="animation-delay: 0.4s;"></i>
-                                    <span class="text-white ml-1 text-sm">4.9/5.0</span>
+                                    <span class="text-white ml-1 text-xs sm:text-sm">4.9/5.0</span>
                                 </div>
                                 <p class="text-[10px] sm:text-xs text-slate-200 font-semibold" style="text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Over 1,80,000+ happy customers nationwide</p>
                             </div>
                         </div>
 
                         <!-- Enhanced CTA Buttons -->
-                        <div class="flex flex-wrap gap-3 pt-2" style="animation: slide-up 1s ease-out 1s both;">
-                            <a href="#leadBookingForm" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-brand-orange to-brand-hover hover:from-brand-hover hover:to-brand-dark text-white font-black text-xs sm:text-sm shadow-glow hover:shadow-glow-lg hover:-translate-y-2 hover:scale-105 transition-all duration-300 btn-premium group">
+                        <div class="flex flex-wrap gap-2 sm:gap-3 pt-2" style="animation: slide-up 1s ease-out 1s both;">
+                            <a href="#leadBookingForm" class="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl bg-gradient-to-r from-brand-orange to-brand-hover hover:from-brand-hover hover:to-brand-dark text-white font-black text-xs sm:text-sm shadow-glow hover:shadow-glow-lg hover:-translate-y-2 hover:scale-105 transition-all duration-300 btn-premium group flex-1 sm:flex-initial">
                                 <i class="fa-solid fa-calendar-check group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300"></i>
                                 <span>Book Service Now</span>
-                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform hidden sm:inline"></i>
                             </a>
-                            <a href="tel:9212322322" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl glass-dark border-2 border-white/20 hover:border-brand-orange text-white font-black text-xs sm:text-sm shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-300 group">
+                            <a href="tel:9212322322" class="inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl glass-dark border-2 border-white/20 hover:border-brand-orange text-white font-black text-xs sm:text-sm shadow-xl hover:shadow-2xl hover:-translate-y-2 hover:scale-105 transition-all duration-300 group flex-1 sm:flex-initial">
                                 <i class="fa-solid fa-phone text-brand-orange group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300"></i>
                                 <span>Call Expert</span>
                             </a>
@@ -487,50 +640,47 @@
                     </div>
 
                     <!-- Right Content - Enhanced Booking Form -->
-                    <div class="lg:col-span-6" style="animation: fade-in 1.2s ease-out 0.5s both;">
-                        <div class="glass-dark rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-premium border-2 border-white/20 hover:border-white/30 relative overflow-hidden backdrop-blur-2xl transition-all duration-500 hover:shadow-glow">
+                    <div class="lg:col-span-6 order-1 lg:order-2" style="animation: fade-in 1.2s ease-out 0.5s both;">
+                        <div class="glass-dark rounded-2xl p-4 sm:p-6 md:p-8 shadow-premium border-2 border-white/20 hover:border-white/30 relative overflow-hidden backdrop-blur-2xl transition-all duration-500 hover:shadow-glow">
                             <!-- Enhanced Form Background Effect -->
                             <div class="absolute top-0 right-0 w-48 h-48 bg-gradient-to-br from-brand-orange/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
                             <div class="absolute bottom-0 left-0 w-36 h-36 bg-gradient-to-tr from-blue-500/10 to-transparent rounded-full blur-2xl"></div>
                             
-                            <div class="border-b-2 border-white/10 pb-5 sm:pb-6 mb-6 sm:mb-8 relative z-10">
-                                <div class="flex justify-between items-start gap-3 mb-2">
-                                    <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight font-display">
+                            <div class="border-b-2 border-white/10 pb-4 sm:pb-6 mb-4 sm:mb-6 relative z-10">
+                                <div class="flex justify-between items-start gap-2 mb-2">
+                                    <h2 class="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight font-display">
                                         Book Service Now
                                     </h2>
-                                    <!-- <span class="bg-gradient-to-r from-orange-500 to-orange-600 text-white border-2 border-orange-400/30 text-[10px] sm:text-[11px] font-black px-3 py-1.5 rounded-full shrink-0 shadow-glow animate-pulse-glow">
-                                        ⚡ FREE Diagnostic
-                                    </span> -->
                                 </div>
-                                <p class="text-xs sm:text-sm text-slate-300 font-medium">Get instant callback from certified technician in <span class="font-bold text-brand-orange">under 5 minutes</span></p>
+                                <p class="text-[10px] sm:text-xs md:text-sm text-slate-300 font-medium">Get instant callback from certified technician in <span class="font-bold text-brand-orange">under 5 minutes</span></p>
                             </div>
 
-                            <form id="leadBookingForm" class="space-y-5 sm:space-y-5 relative z-8">
+                            <form id="leadBookingForm" class="space-y-3 sm:space-y-4 relative z-8">
                                 <div>
-                                    <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">WhatsApp Mobile Number</label>
+                                    <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">WhatsApp Mobile Number</label>
                                     <div class="relative group">
-                                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-slate-400 font-bold text-sm">+91</span>
-                                        <input type="tel" id="mobileNumber" required pattern="[0-9]{10}" placeholder="Enter 10-digit WhatsApp mobile number" class="w-full glass-dark border-2 border-white/20 rounded-2xl pl-14 pr-4 py-3.5 sm:py-4 text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300">
-                                        <i class="fa-solid fa-phone absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-orange transition-colors"></i>
+                                        <span class="absolute inset-y-0 left-0 flex items-center pl-3 sm:pl-4 text-slate-400 font-bold text-xs sm:text-sm">+91</span>
+                                        <input type="tel" id="mobileNumber" required pattern="[0-9]{10}" placeholder="Enter 10-digit WhatsApp mobile number" class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl pl-11 sm:pl-14 pr-3 sm:pr-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300">
+                                        <i class="fa-solid fa-phone absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-orange transition-colors text-xs sm:text-base"></i>
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     <div>
-                                        <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Category</label>
+                                        <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">Category</label>
                                         <div class="relative">
                                             <input 
                                                 type="text" 
                                                 id="categorySearch" 
                                                 placeholder="Search or Select Category *" 
                                                 autocomplete="off"
-                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
                                             >
                                             <input type="hidden" id="mainCategorySelect" required>
-                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            <i class="fa-solid fa-chevron-down absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
                                             
                                             <!-- Dropdown List -->
-                                            <div id="categoryDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                            <div id="categoryDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl shadow-premium max-h-64 overflow-y-auto">
                                                 <div id="categoryList" class="py-2">
                                                     <!-- Categories will be populated here -->
                                                 </div>
@@ -539,20 +689,20 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Product</label>
+                                        <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">Product</label>
                                         <div class="relative">
                                             <input 
                                                 type="text" 
                                                 id="productSearch" 
                                                 placeholder="Search or Select Product *" 
                                                 autocomplete="off"
-                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
                                             >
                                             <input type="hidden" id="subCategorySelect" required>
-                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            <i class="fa-solid fa-chevron-down absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
                                             
                                             <!-- Dropdown List -->
-                                            <div id="productDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                            <div id="productDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl shadow-premium max-h-64 overflow-y-auto">
                                                 <div id="productList" class="py-2">
                                                     <!-- Products will be populated here -->
                                                 </div>
@@ -561,22 +711,22 @@
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                                     <div>
-                                        <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Service Type</label>
+                                        <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">Service Type</label>
                                         <div class="relative">
                                             <input 
                                                 type="text" 
                                                 id="serviceTypeSearch" 
                                                 placeholder="Search or Select Service Type *" 
                                                 autocomplete="off"
-                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
                                             >
                                             <input type="hidden" id="serviceTypeSelect" required>
-                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            <i class="fa-solid fa-chevron-down absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
                                             
                                             <!-- Dropdown List -->
-                                            <div id="serviceTypeDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                            <div id="serviceTypeDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl shadow-premium max-h-64 overflow-y-auto">
                                                 <div id="serviceTypeList" class="py-2">
                                                     <!-- Service types will be populated here -->
                                                 </div>
@@ -585,20 +735,20 @@
                                     </div>
 
                                     <div>
-                                        <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Brand (Optional)</label>
+                                        <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">Brand (Optional)</label>
                                         <div class="relative">
                                             <input 
                                                 type="text" 
                                                 id="brandSearch" 
                                                 placeholder="Search or Select Brand" 
                                                 autocomplete="off"
-                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
                                             >
                                             <input type="hidden" id="brandSelect">
-                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            <i class="fa-solid fa-chevron-down absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
                                             
                                             <!-- Dropdown List -->
-                                            <div id="brandDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                            <div id="brandDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl shadow-premium max-h-64 overflow-y-auto">
                                                 <div id="brandList" class="py-2">
                                                     <!-- Brands will be populated here -->
                                                 </div>
@@ -607,26 +757,26 @@
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
                                     <div class="sm:col-span-2">
-                                        <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">Address</label>
-                                        <input type="text" id="fullAddress" required placeholder="Enter your full address / locality" class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300">
+                                        <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">Address</label>
+                                        <input type="text" id="fullAddress" required placeholder="Enter your full address / locality" class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300">
                                     </div>
                                     <div>
-                                        <label class="block text-xs font-bold text-white mb-2 uppercase tracking-wider">City</label>
+                                        <label class="block text-[10px] sm:text-xs font-bold text-white mb-1.5 sm:mb-2 uppercase tracking-wider">City</label>
                                         <div class="relative">
                                             <input 
                                                 type="text" 
                                                 id="citySearch" 
                                                 placeholder="Search or Select City *" 
                                                 autocomplete="off"
-                                                class="w-full glass-dark border-2 border-white/20 rounded-2xl px-4 py-3.5 sm:py-4 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
+                                                class="w-full glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2.5 sm:py-3.5 text-xs sm:text-sm font-bold text-white placeholder:text-slate-400 placeholder:font-normal focus:outline-none focus:border-brand-orange focus:ring-4 focus:ring-brand-orange/20 transition-all duration-300"
                                             >
                                             <input type="hidden" id="citySelect" required>
-                                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none"></i>
+                                            <i class="fa-solid fa-chevron-down absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xs"></i>
                                             
                                             <!-- Dropdown List -->
-                                            <div id="cityDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-2xl shadow-premium max-h-64 overflow-y-auto">
+                                            <div id="cityDropdown" class="hidden absolute z-50 w-full mt-2 glass-dark border-2 border-white/20 rounded-xl sm:rounded-2xl shadow-premium max-h-64 overflow-y-auto">
                                                 <div id="cityList" class="py-2">
                                                     <!-- Cities will be populated here -->
                                                 </div>
@@ -635,14 +785,14 @@
                                     </div>
                                 </div>
 
-                                <div class="flex items-start gap-3 pt-2">
-                                    <input type="checkbox" id="termsConsent" required checked class="mt-1 rounded-md border-2 border-white/20 text-brand-orange focus:ring-brand-orange focus:ring-4 focus:ring-offset-0 w-5 h-5 cursor-pointer shrink-0 transition-all bg-transparent">
-                                    <label for="termsConsent" class="text-[11px] sm:text-xs text-slate-300 leading-snug cursor-pointer">
+                                <div class="flex items-start gap-2 sm:gap-3 pt-2">
+                                    <input type="checkbox" id="termsConsent" required checked class="mt-0.5 rounded border-2 border-white/20 text-brand-orange focus:ring-brand-orange focus:ring-2 focus:ring-offset-0 cursor-pointer shrink-0 transition-all bg-transparent" style="width: 16px; height: 16px; min-width: 16px; min-height: 16px;">
+                                    <label for="termsConsent" class="text-[10px] sm:text-xs text-slate-300 leading-tight cursor-pointer">
                                         I agree to the <a href="#" class="text-white underline font-bold hover:text-brand-orange transition">Terms & Conditions</a> and <a href="#" class="text-white underline font-bold hover:text-brand-orange transition">Privacy Policy</a>.
                                     </label>
                                 </div>
 
-                                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-brand-orange to-brand-hover hover:from-brand-hover hover:to-brand-dark text-white font-black py-4 sm:py-5 px-8 rounded-2xl shadow-glow hover:shadow-glow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 text-sm sm:text-base uppercase tracking-wider cursor-pointer btn-premium group relative overflow-hidden">
+                                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-brand-orange to-brand-hover hover:from-brand-hover hover:to-brand-dark text-white font-black py-3 sm:py-4 md:py-5 px-6 sm:px-8 rounded-xl sm:rounded-2xl shadow-glow hover:shadow-glow-lg hover:-translate-y-1 transition-all duration-300 flex items-center justify-center gap-3 text-xs sm:text-sm md:text-base uppercase tracking-wider cursor-pointer btn-premium group relative overflow-hidden">
                                     <span id="btnText" class="relative z-10 flex items-center gap-3">
                                         <i class="fa-solid fa-paper-plane group-hover:rotate-12 transition-transform"></i> 
                                         Submit Request
@@ -652,8 +802,8 @@
                                     </span>
                                 </button>
 
-                                <div class="flex items-center justify-center gap-2 text-[10px] text-slate-300 pt-2">
-                                    <i class="fa-solid fa-lock text-brand-orange"></i>
+                                <div class="flex items-center justify-center gap-2 text-[9px] sm:text-[10px] text-slate-300 pt-1 sm:pt-2">
+                                    <i class="fa-solid fa-lock text-brand-orange text-xs"></i>
                                     <span class="font-semibold">Your information is 100% secure and encrypted</span>
                                 </div>
                             </form>
@@ -1657,6 +1807,47 @@
 
     <!-- JavaScript -->
     <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+        }
+        
+        if (closeMobileMenu && mobileMenu) {
+            closeMobileMenu.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        }
+        
+        // Mobile Dropdown Toggle
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.mobile-dropdown-btn')) {
+                const btn = e.target.closest('.mobile-dropdown-btn');
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('.fa-chevron-down');
+                
+                if (content && content.classList.contains('mobile-dropdown-content')) {
+                    content.classList.toggle('hidden');
+                    icon.style.transform = content.classList.contains('hidden') ? '' : 'rotate(180deg)';
+                }
+            }
+            
+            // Close mobile menu when clicking on links
+            if (e.target.closest('#mobileMenu a[href^="#"]')) {
+                if (mobileMenu) {
+                    mobileMenu.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }
+            }
+        });
+        
         // Navbar Scroll Effect - Removed background changes to keep fully transparent
         const navbar = document.getElementById('navbar');
         let lastScroll = 0;
@@ -2387,8 +2578,8 @@
 </body>
 </html>
 
-    <!-- Fixed Floating Side Buttons -->
-    <div class="fixed right-6 top-1/2 -translate-y-1/2 z-[9999] flex flex-col gap-4">
+    <!-- Fixed Floating Side Buttons - Desktop Only -->
+    <div class="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-[9999] flex-col gap-4">
         <!-- WhatsApp Button -->
         <a href="https://wa.me/919212322322?text=Hi%20Repair%20India,%20I%20need%20assistance%20with%20a%20service%20booking." 
            target="_blank" 
@@ -2418,19 +2609,19 @@
         </a>
     </div>
 
-    <!-- Mobile Floating Buttons (Bottom) -->
-    <div class="fixed bottom-6 right-6 z-[9999] flex gap-3 lg:hidden">
+    <!-- Mobile Floating Buttons (Bottom Right) -->
+    <div class="fixed bottom-4 right-4 z-[9999] flex gap-3 lg:hidden">
         <!-- WhatsApp Button Mobile -->
         <a href="https://wa.me/919212322322?text=Hi%20Repair%20India,%20I%20need%20assistance%20with%20a%20service%20booking." 
            target="_blank" 
-           class="flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 animate-float">
+           class="relative flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 animate-float">
             <i class="fa-brands fa-whatsapp text-white text-2xl"></i>
             <span class="absolute inset-0 rounded-full bg-emerald-500 animate-ping opacity-20"></span>
         </a>
 
         <!-- Call Button Mobile -->
         <a href="tel:9212322322" 
-           class="flex items-center justify-center w-14 h-14 bg-gradient-to-br from-brand-orange to-brand-hover rounded-full shadow-2xl transition-all duration-300 hover:scale-110 animate-float"
+           class="relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-brand-orange to-brand-hover rounded-full shadow-2xl transition-all duration-300 hover:scale-110 animate-float"
            style="animation-delay: 0.5s;">
             <i class="fa-solid fa-phone text-white text-xl"></i>
             <span class="absolute inset-0 rounded-full bg-brand-orange animate-ping opacity-20"></span>

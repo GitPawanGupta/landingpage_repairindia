@@ -2411,71 +2411,71 @@
         // Professional Success Modal
         function showSuccessModal(formData) {
             const modalHTML = `
-                <div id="successModal" class="fixed inset-0 z-[99999] flex items-center justify-center p-4 animate-fade-in" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px);">
-                    <div class="glass-card rounded-3xl max-w-md w-full p-8 shadow-premium border-2 border-white/20 relative animate-slide-up">
+                <div id="successModal" class="fixed inset-0 z-[99999] flex items-center justify-center p-3 sm:p-4 animate-fade-in" style="background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px);">
+                    <div class="glass-card rounded-2xl sm:rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-premium border-2 border-white/20 relative animate-slide-up">
                         <!-- Success Icon -->
-                        <div class="w-20 h-20 mx-auto mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-glow animate-float">
-                            <i class="fa-solid fa-check text-white text-4xl"></i>
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-full flex items-center justify-center shadow-glow animate-float">
+                            <i class="fa-solid fa-check text-white text-3xl sm:text-4xl"></i>
                         </div>
                         
                         <!-- Success Message -->
-                        <h3 class="text-2xl font-black text-navy-950 text-center mb-3 font-display">
+                        <h3 class="text-xl sm:text-2xl font-black text-navy-950 text-center mb-2 sm:mb-3 font-display leading-tight">
                             Request Submitted Successfully!
                         </h3>
                         
-                        <p class="text-slate-600 text-center mb-6 text-sm leading-relaxed">
+                        <p class="text-slate-600 text-center mb-5 sm:mb-6 text-xs sm:text-sm leading-relaxed">
                             Thank you for choosing <span class="font-bold text-brand-orange">Repair India</span>. Your service request has been received.
                         </p>
                         
                         <!-- Details Card -->
-                        <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-5 mb-6 space-y-3">
+                        <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl sm:rounded-2xl p-4 sm:p-5 mb-5 sm:mb-6 space-y-3">
                             <div class="flex items-center gap-3 pb-3 border-b border-slate-200">
-                                <div class="w-10 h-10 rounded-xl bg-brand-orange/10 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-phone text-brand-orange"></i>
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-brand-orange/10 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-phone text-brand-orange text-sm sm:text-base"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-xs text-slate-500 font-semibold">Our expert will call you within</p>
-                                    <p class="text-base font-black text-navy-950">5 Minutes</p>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Our expert will call you within</p>
+                                    <p class="text-base sm:text-lg font-black text-navy-950">5 Minutes</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center gap-3 pb-3 border-b border-slate-200">
-                                <div class="w-10 h-10 rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-mobile-screen text-blue-500"></i>
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-blue-500/10 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-mobile-screen text-blue-500 text-sm sm:text-base"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-xs text-slate-500 font-semibold">Contact Number</p>
-                                    <p class="text-base font-black text-navy-950">+91 ${formData.mobile}</p>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Contact Number</p>
+                                    <p class="text-sm sm:text-base font-black text-navy-950">+91 ${formData.mobile}</p>
                                 </div>
                             </div>
                             
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center shrink-0">
-                                    <i class="fa-solid fa-screwdriver-wrench text-purple-500"></i>
+                                <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-purple-500/10 flex items-center justify-center shrink-0">
+                                    <i class="fa-solid fa-screwdriver-wrench text-purple-500 text-sm sm:text-base"></i>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-xs text-slate-500 font-semibold">Service Requested</p>
-                                    <p class="text-sm font-black text-navy-950">${formData.product} - ${formData.serviceType}</p>
+                                    <p class="text-[10px] sm:text-xs text-slate-500 font-semibold">Service Requested</p>
+                                    <p class="text-xs sm:text-sm font-black text-navy-950 leading-tight">${formData.product} - ${formData.serviceType}</p>
                                 </div>
                             </div>
                         </div>
                         
                         <!-- Action Buttons -->
-                        <div class="space-y-3">
-                            <button onclick="closeSuccessModal()" class="w-full bg-gradient-to-r from-brand-orange to-brand-hover hover:from-brand-hover hover:to-brand-dark text-white font-black py-4 px-6 rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 flex items-center justify-center gap-2 group">
+                        <div class="space-y-2 sm:space-y-3">
+                            <button onclick="closeSuccessModal()" class="w-full bg-gradient-to-r from-brand-orange to-brand-hover hover:from-brand-hover hover:to-brand-dark text-white font-black py-3 sm:py-4 px-5 sm:px-6 rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 flex items-center justify-center gap-2 group text-sm sm:text-base">
                                 <span>Got It, Thanks!</span>
                                 <i class="fa-solid fa-thumbs-up group-hover:scale-110 transition-transform"></i>
                             </button>
                             
-                            <a href="tel:9212322322" class="w-full glass-dark border-2 border-white/20 text-white font-bold py-3 px-6 rounded-xl hover:border-brand-orange transition-all duration-300 flex items-center justify-center gap-2 text-sm">
+                            <a href="tel:9212322322" class="w-full glass-dark border-2 border-white/20 text-white font-bold py-2.5 sm:py-3 px-5 sm:px-6 rounded-xl hover:border-brand-orange transition-all duration-300 flex items-center justify-center gap-2 text-xs sm:text-sm">
                                 <i class="fa-solid fa-phone text-brand-orange"></i>
                                 <span>Call Us Now</span>
                             </a>
                         </div>
                         
                         <!-- Close Button -->
-                        <button onclick="closeSuccessModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all group">
-                            <i class="fa-solid fa-times text-slate-600 group-hover:rotate-90 transition-transform"></i>
+                        <button onclick="closeSuccessModal()" class="absolute top-3 right-3 sm:top-4 sm:right-4 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-all group">
+                            <i class="fa-solid fa-times text-slate-600 group-hover:rotate-90 transition-transform text-sm"></i>
                         </button>
                     </div>
                 </div>

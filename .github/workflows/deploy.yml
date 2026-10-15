@@ -26,10 +26,10 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
-          app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "/" # Built app content directory - static files ko directly deploy karo
-          skip_app_build: true # Skip build for pure static HTML site
+          app_location: "." # Current directory
+          api_location: "" # No API
+          output_location: "" # No build output, deploy source directly
+          skip_app_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'

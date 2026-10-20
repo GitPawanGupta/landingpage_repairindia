@@ -6,6 +6,15 @@
     <title>Repair India | Premium Doorstep Home, Appliance & Technical Services</title>
     <meta name="description" content="India's most trusted doorstep repair service for AC, refrigerator, washing machine, microwave, water purifier, and all home appliances. Professional technicians, genuine parts, 90-days warranty.">
     
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18508378675"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'AW-18508378675');
+    </script>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
     
@@ -2391,6 +2400,17 @@
                 
                 if (response.ok && result.success) {
                     console.log('Email sent successfully:', result);
+                    
+                    // Google Ads Conversion Tracking
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'conversion', {
+                            'send_to': 'AW-18508378675/your_conversion_label', // Update with your conversion label
+                            'value': 1.0,
+                            'currency': 'INR',
+                            'transaction_id': ''
+                        });
+                    }
+                    
                     showSuccessModal(formData);
                     document.getElementById('leadBookingForm').reset();
                 } else {

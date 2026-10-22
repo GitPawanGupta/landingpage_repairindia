@@ -2351,7 +2351,80 @@
             });
         }
 
-        // Form Submission with FormSubmit.co (Working version with AJAX)
+        // Dual Email Service Setup with Fallback (EmailJS Primary, FormSubmit Backup)
+        
+        // Initialize EmailJS
+        (function() {
+            // Replace with your actual EmailJS Public Key
+            emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Get from: https://dashboard.emailjs.com/admin/account
+        })();
+        
+        // Email sending function with fallback
+        async function sendEmail(formData) {
+            // Try EmailJS first (Primary)
+            try {
+                console.log('Attempting to send via EmailJS...');
+                const emailjsResponse = await emailjs.send(
+                    'YOUR_SERVICE_ID',      // Get from EmailJS Dashboard
+                    'YOUR_TEMPLATE_ID',     // Get from EmailJS Dashboard
+                    {
+                        to_email: 'info@repairindia.in',
+                        mobile: formData.mobile,
+                        category: formData.category,
+                        product: formData.product,
+                        service_type: formData.serviceType,
+                        brand: formData.brand,
+                        address: formData.address,
+                        city: formData.city,
+                        subject: 'New Service Request - ' + formData.product
+                    }
+                );
+                
+                console.log('✅ Email sent successfully via EmailJS!', emailjsResponse);
+                return { success: true, method: 'EmailJS' };
+                
+            } catch (emailjsError) {
+                console.warn('⚠️ EmailJS failed, trying FormSubmit backup...', emailjsError);
+                
+                // Fallback to FormSubmit (Backup)
+                try {
+                    const formSubmitResponse = await fetch('https://formsubmit.co/ajax/info@repairindia.in', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            Mobile: formData.mobile,
+                            Category: formData.category,
+                            Product: formData.product,
+                            'Service Type': formData.serviceType,
+                            Brand: formData.brand,
+                            Address: formData.address,
+                            City: formData.city,
+                            _subject: 'New Service Request - ' + formData.product,
+                            _template: 'table',
+                            _captcha: 'false'
+                        })
+                    });
+                    
+                    const result = await formSubmitResponse.json();
+                    
+                    if (formSubmitResponse.ok && result.success) {
+                        console.log('✅ Email sent successfully via FormSubmit (Backup)!', result);
+                        return { success: true, method: 'FormSubmit' };
+                    } else {
+                        throw new Error('FormSubmit failed: ' + (result.message || 'Unknown error'));
+                    }
+                    
+                } catch (formSubmitError) {
+                    console.error('❌ Both EmailJS and FormSubmit failed!', formSubmitError);
+                    throw new Error('All email services failed');
+                }
+            }
+        }
+        
+        // Form Submission Handler
         document.getElementById('leadBookingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
@@ -2374,52 +2447,26 @@
                 city: document.getElementById('citySelect').value
             };
             
-            // Send to FormSubmit using AJAX endpoint
             try {
-                const response = await fetch('https://formsubmit.co/ajax/info@repairindia.in', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        Mobile: formData.mobile,
-                        Category: formData.category,
-                        Product: formData.product,
-                        'Service Type': formData.serviceType,
-                        Brand: formData.brand,
-                        Address: formData.address,
-                        City: formData.city,
-                        _subject: 'New Service Request - ' + formData.product,
-                        _template: 'table',
-                        _captcha: 'false'
-                    })
-                });
+                // Try sending email with fallback
+                const emailResult = await sendEmail(formData);
+                console.log(`📧 Email sent via: ${emailResult.method}`);
                 
-                const result = await response.json();
-                
-                if (response.ok && result.success) {
-                    console.log('Email sent successfully:', result);
-                    
-                    // Google Ads Conversion Tracking
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'conversion', {
-                            'send_to': 'AW-18508378675/Nl3ZCNTVhqEdELPkvflE', // Update with your conversion label
-                            'value': 1.0,
-                            'currency': 'INR',
-                            'transaction_id': ''
-                        });
-                    }
-                    
-                    showSuccessModal(formData);
-                    document.getElementById('leadBookingForm').reset();
-                } else {
-                    console.error('Submission failed:', result);
-                    throw new Error(result.message || 'Submission failed');
+                // Google Ads Conversion Tracking
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-18508378675/Nl3ZCNTVhqEdELPkvflE',
+                        'value': 1.0,
+                        'currency': 'INR',
+                        'transaction_id': ''
+                    });
                 }
                 
+                showSuccessModal(formData);
+                document.getElementById('leadBookingForm').reset();
+                
             } catch (error) {
-                console.error('Form submission error:', error);
+                console.error('❌ Form submission failed:', error);
                 showErrorModal();
             } finally {
                 btnText.classList.remove('hidden');

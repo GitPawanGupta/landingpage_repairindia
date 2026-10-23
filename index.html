@@ -2353,10 +2353,9 @@
 
         // Dual Email Service Setup with Fallback (EmailJS Primary, FormSubmit Backup)
         
-        // Initialize EmailJS
+        // Initialize EmailJS with your Public Key
         (function() {
-            // Replace with your actual EmailJS Public Key
-            emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Get from: https://dashboard.emailjs.com/admin/account
+            emailjs.init("-tLBUMYFjw4lcrf0"); // Your EmailJS Public Key
         })();
         
         // Email sending function with fallback
@@ -2365,8 +2364,8 @@
             try {
                 console.log('Attempting to send via EmailJS...');
                 const emailjsResponse = await emailjs.send(
-                    'YOUR_SERVICE_ID',      // Get from EmailJS Dashboard
-                    'YOUR_TEMPLATE_ID',     // Get from EmailJS Dashboard
+                    'service_hhegwyj',      // Your EmailJS Service ID
+                    'template_hjj9bwm',     // Your EmailJS Template ID
                     {
                         to_email: 'info@repairindia.in',
                         mobile: formData.mobile,
@@ -2375,8 +2374,7 @@
                         service_type: formData.serviceType,
                         brand: formData.brand,
                         address: formData.address,
-                        city: formData.city,
-                        subject: 'New Service Request - ' + formData.product
+                        city: formData.city
                     }
                 );
                 
